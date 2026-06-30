@@ -6,7 +6,15 @@ from src.app import app
 client = TestClient(app)
 
 
-def test_remove_participant_from_activity():
+def test_get_activities_returns_data():
+    response = client.get("/activities")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, dict)
+    assert "Chess Club" in data
+
+
+def test_signup_and_remove_participant_flow():
     activity_name = "Chess Club"
     email = "test.student@mergington.edu"
 
